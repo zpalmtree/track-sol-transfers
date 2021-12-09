@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import * as _ from 'lodash';
 import GenesysGoLogo from './img/genesysgologo.png';
 import RugSceneInvestigationLogo from './img/rug-scene-investigation-logo.png';
+import SlugLogo from './img/slug-logo.svg';
 
 import './App.css';
 
@@ -56,7 +57,7 @@ const useIconStyles = makeStyles({
     }
 });
 
-interface Transaction {
+interface ITransaction {
     amount: number;
     signature: string;
 }
@@ -64,7 +65,7 @@ interface Transaction {
 interface IRow {
     expanded: boolean;
     total: number;
-    transactions: Transaction[];
+    transactions: ITransaction[];
     address: string;
 }
 
@@ -80,7 +81,7 @@ interface IAmountProps {
 
 interface ITransactionProps {
     address: string;
-    tx: Transaction;
+    tx: ITransaction;
     target: string;
 }
 
@@ -483,18 +484,49 @@ function App() {
                 {logMessage}
             </span>
 
-            <span style={{ color: 'white', marginTop: '100px' }}>
-                Powered by
-            </span>
-            <img
-                alt='genesysgo-logo'
-                src={GenesysGoLogo}
-                style={{
-                    width: '128px',
-                    marginTop: '20px',
-                    marginBottom: '40px',
-                }}
-            />
+            <div style={{ marginTop: '100px', display: 'flex' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', marginLeft: '20px', marginRight: '20px' }}>
+                    <span style={{ color: 'white', width: '128px', textAlign: 'center' }}>
+                        Created by
+                    </span>
+                    <div
+                        className='logo-container'
+                        style={{
+                            marginTop: '10px',
+                        }}
+                    >
+                        <img
+                            alt='solslugs-logo'
+                            src={SlugLogo}
+                            style={{
+                                height: '64px',
+                                padding: '10px',
+                            }}
+                        />
+                    </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', marginLeft: '20px', marginRight: '20px' }}>
+                    <span style={{ color: 'white' }}>
+                        Powered by
+                    </span>
+                    <div
+                        className='logo-container'
+                        style={{
+                            marginTop: '10px',
+                        }}
+                    >
+                        <img
+                            alt='genesysgo-logo'
+                            src={GenesysGoLogo}
+                            style={{
+                                height: '64px',
+                                padding: '10px',
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

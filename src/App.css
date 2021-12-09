@@ -1,8 +1,14 @@
-html {
-    min-height: 100%;
+body {
+    background: #0a0a0a;
 }
 
-body {
-    /*background: linear-gradient(180deg, rgba(237,142,174,1) 0%, rgba(214,86,205,1) 52%, rgba(152,83,251,1) 100%); */
-    background: #0a0a0a;
+.logo-container {
+    width: 150px;
+    border: solid;
+    border-width: 1px;
+    border-color: #a768fd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
