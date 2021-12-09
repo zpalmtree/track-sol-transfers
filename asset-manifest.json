@@ -1,14 +1,12 @@
 {
   "files": {
     "main.css": "/track-sol-transfers/static/css/main.d110126a.chunk.css",
-    "main.js": "/track-sol-transfers/static/js/main.331f5c8e.chunk.js",
-    "main.js.map": "/track-sol-transfers/static/js/main.331f5c8e.chunk.js.map",
-    "runtime-main.js": "/track-sol-transfers/static/js/runtime-main.504b3d03.js",
-    "runtime-main.js.map": "/track-sol-transfers/static/js/runtime-main.504b3d03.js.map",
+    "main.js": "/track-sol-transfers/static/js/main.5d6d9847.chunk.js",
+    "main.js.map": "/track-sol-transfers/static/js/main.5d6d9847.chunk.js.map",
+    "runtime-main.js": "/track-sol-transfers/static/js/runtime-main.29300391.js",
+    "runtime-main.js.map": "/track-sol-transfers/static/js/runtime-main.29300391.js.map",
     "static/js/2.13de8788.chunk.js": "/track-sol-transfers/static/js/2.13de8788.chunk.js",
     "static/js/2.13de8788.chunk.js.map": "/track-sol-transfers/static/js/2.13de8788.chunk.js.map",
-    "static/js/3.a0c31401.chunk.js": "/track-sol-transfers/static/js/3.a0c31401.chunk.js",
-    "static/js/3.a0c31401.chunk.js.map": "/track-sol-transfers/static/js/3.a0c31401.chunk.js.map",
     "index.html": "/track-sol-transfers/index.html",
     "static/css/main.d110126a.chunk.css.map": "/track-sol-transfers/static/css/main.d110126a.chunk.css.map",
     "static/js/2.13de8788.chunk.js.LICENSE.txt": "/track-sol-transfers/static/js/2.13de8788.chunk.js.LICENSE.txt",
@@ -17,9 +15,9 @@
     "static/media/slug-logo.13b7010f.svg": "/track-sol-transfers/static/media/slug-logo.13b7010f.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.504b3d03.js",
+    "static/js/runtime-main.29300391.js",
     "static/js/2.13de8788.chunk.js",
     "static/css/main.d110126a.chunk.css",
-    "static/js/main.331f5c8e.chunk.js"
+    "static/js/main.5d6d9847.chunk.js"
   ]
 }
