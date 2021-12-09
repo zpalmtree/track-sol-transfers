@@ -12,6 +12,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import IconButton from '@material-ui/core/IconButton';
 import * as _ from 'lodash';
+import GenesysGoLogo from './img/genesysgologo.png';
+import RugSceneInvestigationLogo from './img/rug-scene-investigation-logo.png';
 
 import './App.css';
 
@@ -337,7 +339,7 @@ function App() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <img
                 alt='rug-scene-logo'
-                src={`/rug-scene-investigation-logo.png`}
+                src={RugSceneInvestigationLogo}
                 style={{
                     width: '256px',
                 }}
@@ -413,7 +415,7 @@ function App() {
             </span>
             <img
                 alt='genesysgo-logo'
-                src={`/genesysgologo.png`}
+                src={GenesysGoLogo}
                 style={{
                     width: '128px',
                     marginTop: '20px',
