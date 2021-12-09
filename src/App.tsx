@@ -56,16 +56,32 @@ const useIconStyles = makeStyles({
     }
 });
 
+interface Transaction {
+    amount: number;
+    signature: string;
+}
+
 interface IRow {
     expanded: boolean;
     total: number;
-    transactions: string[];
+    transactions: Transaction[];
     address: string;
 }
 
 interface IRowProps {
     handleExpand: (address: string) => void;
     row: IRow;
+    target: string;
+}
+
+interface IAmountProps {
+    amount: number;
+}
+
+interface ITransactionProps {
+    address: string;
+    tx: Transaction;
+    target: string;
 }
 
 function sleep(ms: number): Promise<void> {
@@ -117,7 +133,7 @@ async function getTransaction(
                     continue;
                 }
 
-                const change = before - after;
+                const change = after - before;
 
                 changes.push({
                     address: key.toString(),
@@ -135,10 +151,59 @@ async function getTransaction(
     }
 }
 
+function formatAddress(address: string) {
+    return address.substr(0, 4) + '..' + address.substr(address.length - 4);
+}
+
+function formatSOL(amount: number) {
+    return (amount / LAMPORTS_PER_SOL).toFixed(2);
+}
+
+function Amount(props: IAmountProps) {
+    const {
+        amount,
+    } = props;
+
+    return (
+        <StyledTableCell align="center" style={{ color: amount > 0 ? '#4BB543' : 'red' }}>
+            {`${formatSOL(amount)} SOL`}
+        </StyledTableCell>
+    );
+}
+
+function Transaction(props: ITransactionProps) {
+    const {
+        tx,
+        target,
+        address,
+    } = props;
+
+    const sender = tx.amount > 0 ? target : address;
+    const receiver = tx.amount > 0 ? address : target;
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
+            <span style={{ color: 'white', fontFamily: 'monospace', marginRight: '10px' }}>
+                {`${formatAddress(sender)} → ${formatAddress(receiver)}`}
+            </span>
+
+            <a href={`https://solscan.io/tx/${tx.signature}`} style={{ color: 'white', fontFamily: 'monospace', marginTop: '5px', textDecoration: 'none' }}>
+                {tx.signature}
+            </a>
+
+            <span style={{ fontFamily: 'monospace', marginRight: '10px', color: tx.amount > 0 ? '#4BB543' : 'red' }}>
+                {`${formatSOL(tx.amount)} SOL`}
+            </span>
+
+        </div>
+    );
+}
+
 function Row(props: IRowProps) {
     const {
         row,
         handleExpand,
+        target,
     } = props;
 
     const classes = useRowStyles();
@@ -149,24 +214,27 @@ function Row(props: IRowProps) {
             <TableRow key={row.address} className={classes.root}>
                 <StyledTableCell align="center">
                     <IconButton aria-label="expand row" size="small" onClick={() => handleExpand(row.address)}>
+                        <span style={{ color: 'white', fontSize: '20px', marginRight: '5px' }}>
+                            {row.expanded ? 'Collapse' : 'Expand' }
+                        </span>
                         {row.expanded
                             ? <KeyboardArrowUpIcon className={iconClasses.root}/>
                             : <KeyboardArrowDownIcon className={iconClasses.root}/>}
                     </IconButton>
                 </StyledTableCell>
                 <AddressTableCell align="center">{row.address}</AddressTableCell>
-                <StyledTableCell align="center" style={{ color: row.total > 0 ? 'white' : 'red' }}>
-                    {`${(row.total / LAMPORTS_PER_SOL).toFixed(3)} SOL`}
-                </StyledTableCell>
+                <Amount amount={row.total}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={row.expanded} timeout="auto" unmountOnExit>
                         <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
-                            {row.transactions.map((tx) => (
-                                <a href={`https://solscan.io/tx/${tx}`} style={{ color: 'white', fontFamily: 'monospace', marginTop: '5px', textDecoration: 'none' }}>
-                                    {tx}
-                                </a>
+                            {row.transactions.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount)).map((tx) => (
+                                <Transaction
+                                    tx={tx}
+                                    target={target}
+                                    address={row.address}
+                                />
                             ))}
                         </div>
                     </Collapse>
@@ -181,7 +249,7 @@ function App() {
     const [address, setAddress] = React.useState<string>('');
     const [logMessage, setLogMessage] = React.useState<string>('');
     const [finding, setFinding] = React.useState<boolean>(false);
-    const [transactions, setTransactions] = React.useState<any[]>([]);
+    const [transactions, setTransactions] = React.useState<IRow[]>([]);
 
     const cancel = React.useRef(false);
 
@@ -304,7 +372,11 @@ function App() {
                         expanded: false,
                     };
 
-                    addressData.transactions.push(change.signature);
+                    addressData.transactions.push({
+                        signature: change.signature,
+                        amount: change.change,
+                    });
+
                     addressData.total += change.change;
 
                     movementMap.set(change.address, addressData);
@@ -383,14 +455,14 @@ function App() {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell align="center" style={{ width: '200px' }}>
+                                <StyledTableCell align="center" style={{ width: '300px' }}>
                                     Transactions
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     Address
                                 </StyledTableCell>
-                                <StyledTableCell align="center" style={{ width: '200px' }}>
-                                    SOL Moved
+                                <StyledTableCell align="center" style={{ width: '300px' }}>
+                                    Address Gained/Lost
                                 </StyledTableCell>
                             </TableRow>
                         </TableHead>
@@ -398,6 +470,7 @@ function App() {
                             {transactions.map((row) => (
                                 <Row
                                     row={row}
+                                    target={address}
                                     handleExpand={handleExpand}
                                 />
                             ))}
