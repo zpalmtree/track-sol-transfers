@@ -1,5 +1,16 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(fonts/Roboto.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoMono';
+    src: url(fonts/RobotoMono.ttf) format('truetype');
+}
+
 body {
     background: #0a0a0a;
+    font-family: 'Roboto';
 }
 
 .logo-container {

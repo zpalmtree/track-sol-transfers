@@ -26,7 +26,6 @@ const StyledTableCell = withStyles((theme) => ({
         color: 'white',
         fontSize: '20px',
         textTransform: 'none',
-        fontFamily: 'Agenda-Bold, Arial, sans-serif',
     },
     head: {
         fontSize: '30px',
@@ -39,7 +38,7 @@ const StyledTableCell = withStyles((theme) => ({
 const AddressTableCell = withStyles((theme) => ({
     root: {
         fontSize: '20px',
-        fontFamily: 'monospace',
+        fontFamily: 'RobotoMono',
     }
 }))(StyledTableCell)
 
@@ -184,15 +183,15 @@ function Transaction(props: ITransactionProps) {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
-            <span style={{ color: 'white', fontFamily: 'monospace', marginRight: '10px' }}>
+            <span style={{ color: 'white', fontFamily: 'RobotoMono', marginRight: '10px' }}>
                 {`${formatAddress(sender)} → ${formatAddress(receiver)}`}
             </span>
 
-            <a href={`https://solscan.io/tx/${tx.signature}`} style={{ color: 'white', fontFamily: 'monospace', marginTop: '5px', textDecoration: 'none' }}>
+            <a href={`https://solscan.io/tx/${tx.signature}`} style={{ color: 'white', fontFamily: 'RobotoMono', marginTop: '5px', textDecoration: 'none' }}>
                 {tx.signature}
             </a>
 
-            <span style={{ fontFamily: 'monospace', marginRight: '10px', color: tx.amount > 0 ? '#4BB543' : 'red' }}>
+            <span style={{ fontFamily: 'RobotoMono', marginRight: '10px', color: tx.amount > 0 ? '#4BB543' : 'red' }}>
                 {`${formatSOL(tx.amount)} SOL`}
             </span>
 
@@ -444,7 +443,8 @@ function App() {
                     backgroundColor: '#a768fd',
                     border: 'none',
                     padding: '5px',
-                    borderRadius: '5px'
+                    borderRadius: '5px',
+                    fontFamily: 'RobotoMono',
                 }}
                 onClick={handleToggleFind}
             >
