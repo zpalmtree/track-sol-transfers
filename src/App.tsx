@@ -479,7 +479,7 @@ function App() {
                 </TableContainer>
             </div>
 
-            <span style={{ marginTop: '30px', fontSize: '30px', color: 'white', textTransform: 'uppercase', marginBottom: '20px' }}>
+            <span style={{ marginTop: '30px', fontSize: '30px', color: 'white', marginBottom: '20px' }}>
                 {logMessage}
             </span>
 
@@ -492,6 +492,7 @@ function App() {
                 style={{
                     width: '128px',
                     marginTop: '20px',
+                    marginBottom: '40px',
                 }}
             />
         </div>
