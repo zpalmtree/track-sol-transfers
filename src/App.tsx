@@ -330,11 +330,13 @@ function App() {
         setLogMessage('Finding transactions...');
 
         findTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [finding]);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <img
+                alt='rug-scene-logo'
                 src={`/rug-scene-investigation-logo.png`}
                 style={{
                     width: '256px',
@@ -410,6 +412,7 @@ function App() {
                 Powered by
             </span>
             <img
+                alt='genesysgo-logo'
                 src={`/genesysgologo.png`}
                 style={{
                     width: '128px',
